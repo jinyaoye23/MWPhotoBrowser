@@ -212,6 +212,9 @@
 - (void)_performLoadUnderlyingImageAndNotifyWithWebURL:(NSURL *)url {
     @try {
         SDWebImageManager *manager = [SDWebImageManager sharedManager];
+        // add by stephen at 2021-01-04 start 解决某些网络图片加载不了的问题
+        [manager.imageDownloader setValue:@"*/*" forHTTPHeaderField:@"Accept"];
+        // add by stephen at 2021-01-04 end 解决某些网络图片加载不了的问题
         _webImageOperation = [manager downloadImageWithURL:url
                                                    options:0
                                                   progress:^(NSInteger receivedSize, NSInteger expectedSize) {
